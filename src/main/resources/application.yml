@@ -1,0 +1,12 @@
+spring:
+  datasource:
+    username: wanted
+    password: wanted12!
+    url : jdbc:mysql://localhost:3306/wanted
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true

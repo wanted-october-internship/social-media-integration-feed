@@ -30,4 +30,7 @@ public class Account extends BaseEntity {
         this.password = password;
         joinStatus = JoinStatus.READY;
     }
+    public void successJoin() {
+        joinStatus = JoinStatus.JOIN;
+    }
 }

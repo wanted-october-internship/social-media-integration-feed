@@ -5,6 +5,7 @@ import static intergration.feed.common.error.wanted.ErrorCode.NOT_FOUND_CERT_COD
 
 import intergration.feed.account.domain.Account;
 import intergration.feed.account.domain.type.JoinStatus;
+import intergration.feed.account.domain.type.Role;
 import intergration.feed.account.dto.AccountRequestDto.Join;
 import intergration.feed.account.dto.AccountRequestDto.ValidateCertCode;
 import intergration.feed.cert.CertRepository;
@@ -32,7 +33,7 @@ public class AccountWriteService {
         }
         Password.validate(join.getPassword());
         join.encryptPassword(bCryptPasswordEncoder);
-        Account account = join.toEntity();
+        Account account = join.toEntity(Role.USER);
         accountRepository.save(account);
         certRepository.save(RandomCertCode.create(account));
     }

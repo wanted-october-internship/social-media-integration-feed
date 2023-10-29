@@ -14,7 +14,7 @@ import org.hibernate.annotations.Where;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Where(clause = "isApply = false")
+@Where(clause = "is_Apply = false")
 public class Cert extends BaseEntity {
 
     @Column(nullable = false)

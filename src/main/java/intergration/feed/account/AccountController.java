@@ -1,6 +1,7 @@
 package intergration.feed.account;
 
 import intergration.feed.account.dto.AccountRequestDto.Join;
+import intergration.feed.account.dto.AccountRequestDto.Login;
 import intergration.feed.account.dto.AccountRequestDto.ValidateCertCode;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class AccountController {
 
     private final AccountWriteService accountWriteService;
+    private final AccountReadService accountReadService;
 
     @PostMapping
     public ResponseEntity<String> join(@Valid @RequestBody Join join){
@@ -29,4 +31,8 @@ public class AccountController {
         accountWriteService.validateCertCode(validateCertCodeRequest);
     }
 
+    @PostMapping("/login")
+    public String executeLogin(@RequestBody Login login) {
+        return accountReadService.executeLogin(login);
+    }
 }

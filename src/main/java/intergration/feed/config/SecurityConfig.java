@@ -1,6 +1,6 @@
 package intergration.feed.config;
 
-import intergration.feed.account.AccountRepository;
+import intergration.feed.app.account.AccountRepository;
 import intergration.feed.config.jwt.JwtTokenFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;

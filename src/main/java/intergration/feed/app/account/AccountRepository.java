@@ -1,7 +1,7 @@
-package intergration.feed.account;
+package intergration.feed.app.account;
 
-import intergration.feed.account.domain.Account;
-import intergration.feed.account.domain.type.JoinStatus;
+import intergration.feed.app.account.domain.Account;
+import intergration.feed.app.account.domain.type.JoinStatus;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 

@@ -1,16 +1,16 @@
-package intergration.feed.account;
+package intergration.feed.app.account;
 
 import static intergration.feed.common.error.wanted.ErrorCode.NOT_FOUND_ACCOUNT;
 import static intergration.feed.common.error.wanted.ErrorCode.NOT_FOUND_CERT_CODE;
 
-import intergration.feed.account.domain.Account;
-import intergration.feed.account.domain.type.JoinStatus;
-import intergration.feed.account.domain.type.Role;
-import intergration.feed.account.dto.AccountRequestDto.Join;
-import intergration.feed.account.dto.AccountRequestDto.ValidateCertCode;
-import intergration.feed.cert.CertRepository;
-import intergration.feed.cert.domain.Cert;
-import intergration.feed.cert.domain.RandomCertCode;
+import intergration.feed.app.account.domain.Account;
+import intergration.feed.app.account.domain.type.JoinStatus;
+import intergration.feed.app.account.domain.type.Role;
+import intergration.feed.app.account.dto.AccountRequestDto.Join;
+import intergration.feed.app.account.dto.AccountRequestDto.ValidateCertCode;
+import intergration.feed.app.cert.CertRepository;
+import intergration.feed.app.cert.domain.Cert;
+import intergration.feed.app.cert.domain.RandomCertCode;
 import intergration.feed.common.error.wanted.ErrorCode;
 import intergration.feed.common.error.wanted.WantedException;
 import intergration.feed.validate.Password;

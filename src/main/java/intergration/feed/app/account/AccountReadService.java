@@ -1,9 +1,9 @@
-package intergration.feed.account;
+package intergration.feed.app.account;
 
 import static intergration.feed.common.error.wanted.ErrorCode.NOT_EQUALS_LOGIN_INFO;
 
-import intergration.feed.account.domain.Account;
-import intergration.feed.account.dto.AccountRequestDto.Login;
+import intergration.feed.app.account.domain.Account;
+import intergration.feed.app.account.dto.AccountRequestDto.Login;
 import intergration.feed.common.error.wanted.WantedException;
 import intergration.feed.config.jwt.JwtTokenUtil;
 import lombok.RequiredArgsConstructor;

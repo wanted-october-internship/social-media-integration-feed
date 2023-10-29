@@ -2,8 +2,8 @@ package intergration.feed.config.jwt;
 
 import static intergration.feed.common.error.wanted.ErrorCode.NOT_FOUND_ACCOUNT;
 
-import intergration.feed.account.AccountRepository;
-import intergration.feed.account.domain.Account;
+import intergration.feed.app.account.AccountRepository;
+import intergration.feed.app.account.domain.Account;
 import intergration.feed.common.error.wanted.WantedException;
 import java.io.IOException;
 import java.util.List;

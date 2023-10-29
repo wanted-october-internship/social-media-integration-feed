@@ -1,6 +1,6 @@
-package intergration.feed.cert.domain;
+package intergration.feed.app.cert.domain;
 
-import intergration.feed.account.domain.Account;
+import intergration.feed.app.account.domain.Account;
 import intergration.feed.common.BaseEntity;
 import javax.persistence.Column;
 import javax.persistence.Entity;

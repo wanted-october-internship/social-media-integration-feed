@@ -1,4 +1,4 @@
-package intergration.feed.account.dto;
+package intergration.feed.app.account.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

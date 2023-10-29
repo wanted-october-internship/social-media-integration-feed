@@ -1,8 +1,8 @@
-package intergration.feed.account;
+package intergration.feed.app.account;
 
-import intergration.feed.account.dto.AccountRequestDto.Join;
-import intergration.feed.account.dto.AccountRequestDto.Login;
-import intergration.feed.account.dto.AccountRequestDto.ValidateCertCode;
+import intergration.feed.app.account.dto.AccountRequestDto.Login;
+import intergration.feed.app.account.dto.AccountRequestDto.ValidateCertCode;
+import intergration.feed.app.account.dto.AccountRequestDto;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +21,7 @@ public class AccountController {
     private final AccountReadService accountReadService;
 
     @PostMapping
-    public ResponseEntity<String> join(@Valid @RequestBody Join join){
+    public ResponseEntity<String> join(@Valid @RequestBody AccountRequestDto.Join join){
         accountWriteService.join(join);
         return ResponseEntity.status(201).body("회원가입 완료");
     }

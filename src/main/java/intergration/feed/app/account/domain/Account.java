@@ -1,7 +1,7 @@
-package intergration.feed.account.domain;
+package intergration.feed.app.account.domain;
 
-import intergration.feed.account.domain.type.JoinStatus;
-import intergration.feed.account.domain.type.Role;
+import intergration.feed.app.account.domain.type.JoinStatus;
+import intergration.feed.app.account.domain.type.Role;
 import intergration.feed.common.BaseEntity;
 import javax.persistence.Column;
 import javax.persistence.Entity;

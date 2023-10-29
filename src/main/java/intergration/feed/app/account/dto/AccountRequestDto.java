@@ -1,8 +1,8 @@
-package intergration.feed.account.dto;
+package intergration.feed.app.account.dto;
 
-import intergration.feed.account.domain.Account;
-import intergration.feed.account.domain.type.Role;
-import intergration.feed.cert.domain.Cert;
+import intergration.feed.app.account.domain.Account;
+import intergration.feed.app.account.domain.type.Role;
+import intergration.feed.app.cert.domain.Cert;
 import intergration.feed.common.error.wanted.ErrorCode;
 import intergration.feed.common.error.wanted.WantedException;
 import intergration.feed.validate.Password;

@@ -1,7 +1,7 @@
 package intergration.feed.config.interceptor;
 
-import intergration.feed.account.dto.AccountResponseDto.LoginInfo;
-import intergration.feed.account.annotation.LoginCheck;
+import intergration.feed.app.account.dto.AccountResponseDto.LoginInfo;
+import intergration.feed.app.account.annotation.LoginCheck;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.MethodParameter;
 import org.springframework.security.core.context.SecurityContextHolder;

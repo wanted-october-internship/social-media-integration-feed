@@ -1,6 +1,6 @@
-package intergration.feed.cert.domain;
+package intergration.feed.app.cert.domain;
 
-import intergration.feed.account.domain.Account;
+import intergration.feed.app.account.domain.Account;
 import java.util.UUID;
 
 public class RandomCertCode {

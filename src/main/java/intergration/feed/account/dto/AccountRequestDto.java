@@ -48,4 +48,13 @@ public class AccountRequestDto {
             }
         }
     }
+
+    @Getter
+    @AllArgsConstructor
+    public static class Login {
+        @NotBlank
+        private String loginId;
+        @NotBlank
+        private String password;
+    }
 }

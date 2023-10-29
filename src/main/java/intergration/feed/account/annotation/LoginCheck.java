@@ -1,4 +1,4 @@
-package intergration.feed.annotation;
+package intergration.feed.account.annotation;
 
 import static java.lang.annotation.ElementType.PARAMETER;
 

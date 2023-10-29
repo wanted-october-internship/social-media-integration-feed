@@ -1,6 +1,7 @@
 package intergration.feed.account.domain;
 
 import intergration.feed.account.domain.type.JoinStatus;
+import intergration.feed.account.domain.type.Role;
 import intergration.feed.common.BaseEntity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -23,12 +24,18 @@ public class Account extends BaseEntity {
     private String password;
     @Enumerated(value = EnumType.STRING)
     private JoinStatus joinStatus;
+    @Enumerated(value = EnumType.STRING)
+    private Role role;
 
-    public Account(String loginId, String email, String password) {
+    private Account(String loginId, String email, String password, JoinStatus joinStatus, Role role) {
         this.loginId = loginId;
         this.email = email;
         this.password = password;
-        joinStatus = JoinStatus.READY;
+        this.joinStatus = joinStatus;
+        this.role = role;
+    }
+    public static Account create(String loginId, String email, String password,Role role) {
+        return new Account(loginId,email,password,JoinStatus.READY,role);
     }
     public void successJoin() {
         joinStatus = JoinStatus.JOIN;

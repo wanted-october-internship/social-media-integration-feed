@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 public enum ErrorCode {
     NOT_FOUND_ACCOUNT(HttpStatus.NOT_FOUND,"회원이 존재하지 않습니다."),
     NOT_FOUND_CERT_CODE(HttpStatus.NOT_FOUND,"인증코드가 존재하지 않습니다."),
+    NOT_FOUND_POST(HttpStatus.NOT_FOUND,"게시물이 존재하지 않습니다."),
 
     NOT_EQUALS_LOGIN_INFO(HttpStatus.BAD_REQUEST, "아이디 또는 비밀번호가 틀렸습니다."),
     NOT_EQUALS_CERT_CODE(HttpStatus.BAD_REQUEST, "인증코드가 일치하지 않습니다."),

@@ -4,6 +4,7 @@ import static intergration.feed.common.error.wanted.ErrorCode.NOT_FOUND_ACCOUNT;
 
 import intergration.feed.app.account.AccountRepository;
 import intergration.feed.app.account.domain.Account;
+import intergration.feed.app.account.domain.type.JoinStatus;
 import intergration.feed.common.error.wanted.WantedException;
 import java.io.IOException;
 import java.util.List;
@@ -42,7 +43,7 @@ public class JwtTokenFilter extends OncePerRequestFilter {
             return;
         }
 
-        Account loginUser = accountRepository.findByLoginId(JwtTokenUtil.getLoginId(token, secretKey)).orElseThrow(() -> new WantedException(NOT_FOUND_ACCOUNT));
+        Account loginUser = accountRepository.findByLoginIdAndJoinStatus(JwtTokenUtil.getLoginId(token, secretKey), JoinStatus.JOIN).orElseThrow(() -> new WantedException(NOT_FOUND_ACCOUNT));
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
             loginUser.getLoginId(), null, List.of(new SimpleGrantedAuthority(loginUser.getRole().name())));
         authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));

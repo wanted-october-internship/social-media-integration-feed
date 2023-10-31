@@ -37,7 +37,15 @@ public class PostWriteService {
         if(isLike) {
             post.updateLikeCount();
         }
-
-
+    }
+    public void share(Long id) {
+        Post post = postRepository.findById(id)
+            .orElseThrow(() -> new WantedException(NOT_FOUND_POST));
+        String snsName = post.getSns();
+        SnsService snsService = snsServiceMap.get(snsName);
+        boolean isLike = snsService.share(post.getId());
+        if(isLike) {
+            post.updateShareCount();
+        }
     }
 }

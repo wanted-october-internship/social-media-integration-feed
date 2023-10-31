@@ -46,5 +46,8 @@ public class PostController {
         postWriteService.like(id);
     }
 
-
+    @PostMapping("/share/{postId}")
+    public void share(@PathVariable("postId")Long id) {
+        postWriteService.share(id);
+    }
 }

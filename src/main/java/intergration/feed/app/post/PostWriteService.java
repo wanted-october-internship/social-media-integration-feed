@@ -5,6 +5,7 @@ import static intergration.feed.common.error.wanted.ErrorCode.NOT_FOUND_POST;
 
 import intergration.feed.app.account.AccountRepository;
 import intergration.feed.app.account.domain.Account;
+import intergration.feed.app.account.domain.type.JoinStatus;
 import intergration.feed.app.history.ShareHistoryRepository;
 import intergration.feed.app.history.ViewHistoryRepository;
 import intergration.feed.app.history.domain.ShareHistory;
@@ -42,7 +43,7 @@ public class PostWriteService {
     public void like(Long id, String loginId) {
         Post post = postRepository.findById(id)
             .orElseThrow(() -> new WantedException(NOT_FOUND_POST));
-        Account account = accountRepository.findByLoginId(loginId)
+        Account account = accountRepository.findByLoginIdAndJoinStatus(loginId, JoinStatus.JOIN)
             .orElseThrow(() -> new WantedException(NOT_FOUND_ACCOUNT));
 
         String snsName = post.getSns();
@@ -51,9 +52,12 @@ public class PostWriteService {
         boolean isLike = snsService.like(post.getId());
         if (isLike) {
             int count = viewHistoryRepository.countByAccountAndPost(account, post);
+
+                post.updateLikeCount(count);
             if (count == 0) {
-                post.updateLikeCount();
                 viewHistoryRepository.save(ViewHistory.create(account, post));
+            }else {
+                viewHistoryRepository.deleteByAccountAndPost(account,post);
             }
         }
     }
@@ -61,7 +65,7 @@ public class PostWriteService {
     public void share(Long id, String loginId) {
         Post post = postRepository.findById(id)
             .orElseThrow(() -> new WantedException(NOT_FOUND_POST));
-        Account account = accountRepository.findByLoginId(loginId)
+        Account account = accountRepository.findByLoginIdAndJoinStatus(loginId, JoinStatus.JOIN)
             .orElseThrow(() -> new WantedException(NOT_FOUND_ACCOUNT));
         shareHistoryRepository.save(ShareHistory.create(account, post));
 

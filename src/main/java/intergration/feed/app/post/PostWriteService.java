@@ -5,7 +5,9 @@ import static intergration.feed.common.error.wanted.ErrorCode.NOT_FOUND_POST;
 
 import intergration.feed.app.account.AccountRepository;
 import intergration.feed.app.account.domain.Account;
+import intergration.feed.app.history.ShareHistoryRepository;
 import intergration.feed.app.history.ViewHistoryRepository;
+import intergration.feed.app.history.domain.ShareHistory;
 import intergration.feed.app.history.domain.ViewHistory;
 import intergration.feed.app.post.domain.Post;
 import intergration.feed.app.post.dto.PostRequestDto;
@@ -23,8 +25,10 @@ public class PostWriteService {
 
     private final PostRepository postRepository;
     private final AccountRepository accountRepository;
-    private final ViewHistoryRepository viewHistoryRepository;
     private final Map<String, SnsService> snsServiceMap;
+    private final ViewHistoryRepository viewHistoryRepository;
+    private final ShareHistoryRepository shareHistoryRepository;
+
 
     public void create(PostRequestDto.Create create) {
         Post post = create.toEntity();
@@ -45,8 +49,8 @@ public class PostWriteService {
 
         String snsName = post.getSns();
         SnsService snsService = snsServiceMap.get(snsName);
-        boolean isLike = snsService.like(post.getId());
 
+        boolean isLike = snsService.like(post.getId());
         if(isLike) {
             post.updateLikeCount();
         }
@@ -56,8 +60,11 @@ public class PostWriteService {
             .orElseThrow(() -> new WantedException(NOT_FOUND_POST));
         Account account = accountRepository.findByLoginId(loginId)
             .orElseThrow(() -> new WantedException(NOT_FOUND_ACCOUNT));
+        shareHistoryRepository.save(ShareHistory.create(account,post));
+
         String snsName = post.getSns();
         SnsService snsService = snsServiceMap.get(snsName);
+
         boolean isLike = snsService.share(post.getId());
         if(isLike) {
             post.updateShareCount();

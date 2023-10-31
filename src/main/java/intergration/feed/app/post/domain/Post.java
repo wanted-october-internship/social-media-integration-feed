@@ -63,8 +63,12 @@ public class Post extends BaseEntity {
         return snsType.getSns();
     }
 
-    public void updateLikeCount() {
-        likeCount++;
+    public void updateLikeCount(int count) {
+        if (count == 0) {
+            likeCount++;
+        } else {
+            likeCount--;
+        }
     }
 
     public void updateShareCount(int count) {

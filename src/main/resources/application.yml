@@ -12,3 +12,17 @@ spring:
         format_sql: true
   jwt :
     secret-key : wanted
+  local : true
+sns:
+  facebook:
+    like-url: https://www.facebook.com/likes/
+    share-url: https://www.facebook.com/share/
+  instagram :
+    like-url: https://www.instagram.com/likes/
+    share-url: https://www.instagram.com/share/
+  threads :
+    like-url: https://www.threads.net/likes/
+    share-url: https://www.threads.net/share/
+  twitter :
+    like-url: https://www.twitter.com/likes/
+    share-url: https://www.twitter.com/share/

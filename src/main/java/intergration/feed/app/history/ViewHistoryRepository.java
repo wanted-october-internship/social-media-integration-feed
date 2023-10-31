@@ -12,4 +12,5 @@ public interface ViewHistoryRepository extends JpaRepository<ViewHistory, Long> 
     int countByAccountAndPost(Account account, Post post);
 
     List<ViewHistory> findAllByAccountAndPostIsNotNullOrderByCreatedAtDesc(Account account);
+    void deleteByAccountAndPost(Account account, Post post);
 }

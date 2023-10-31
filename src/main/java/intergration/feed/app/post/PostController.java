@@ -42,12 +42,12 @@ public class PostController {
         return PostingList.toResponse(result);
     }
     @PostMapping("/like/{postId}")
-    public void like(@PathVariable("postId")Long id) {
-        postWriteService.like(id);
+    public void like(@PathVariable("postId")Long id, @LoginCheck LoginInfo loginInfo) {
+        postWriteService.like(id, loginInfo.getLoginId());
     }
 
     @PostMapping("/share/{postId}")
-    public void share(@PathVariable("postId")Long id) {
-        postWriteService.share(id);
+    public void share(@PathVariable("postId")Long id, @LoginCheck LoginInfo loginInfo) {
+        postWriteService.share(id, loginInfo.getLoginId());
     }
 }

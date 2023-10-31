@@ -12,6 +12,7 @@ public enum ErrorCode {
     NOT_FOUND_CERT_CODE(HttpStatus.NOT_FOUND,"인증코드가 존재하지 않습니다."),
     NOT_FOUND_POST(HttpStatus.NOT_FOUND,"게시물이 존재하지 않습니다."),
 
+    NOT_CERT_ACCOUNT(HttpStatus.BAD_REQUEST,"인증이 미완료된 회원입니다."),
     NOT_EQUALS_LOGIN_INFO(HttpStatus.BAD_REQUEST, "아이디 또는 비밀번호가 틀렸습니다."),
     NOT_EQUALS_CERT_CODE(HttpStatus.BAD_REQUEST, "인증코드가 일치하지 않습니다."),
     MUST_NOT_BE_ALL_DIGITS(HttpStatus.BAD_REQUEST, "비밀번호는 숫자로만 이루어질 수 없습니다."),

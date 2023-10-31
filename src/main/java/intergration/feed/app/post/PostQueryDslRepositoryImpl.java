@@ -8,10 +8,9 @@ import com.querydsl.core.types.OrderSpecifier;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import intergration.feed.app.post.domain.Post;
-import intergration.feed.app.post.domain.QHashTag;
 import intergration.feed.app.post.domain.type.SnsType;
-import intergration.feed.app.post.dto.PostRequestDto.Filter;
 import intergration.feed.app.post.dto.type.SortType;
+import intergration.feed.app.post.dto.PostRequestDto.Filter;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -22,16 +21,12 @@ public class PostQueryDslRepositoryImpl implements PostQueryDslRepository{
     private final JPAQueryFactory jpaQueryFactory;
 
     @Override
-    public List<Post> findAllPost(Filter filter) {
+    public List<Post> findAllPost(Filter filter, String loginId) {
         return jpaQueryFactory.select(post).from(post)
-            .where(eqHashTag(filter.getHashTag()),
+            .where(
                 eqSnsType(filter.getSnsType()),
                 containsSearch(filter.getSearchBy(), filter.getSearch()))
             .orderBy(orderSpecifier(filter.getSortType(), filter.getOrderBy())).fetch();
-    }
-
-    private BooleanExpression eqHashTag(String hashTag) {
-        return hashTag != null ? QHashTag.hashTag.title.eq(hashTag) : null;
     }
 
     private BooleanExpression eqSnsType(SnsType snsType) {
@@ -45,12 +40,14 @@ public class PostQueryDslRepositoryImpl implements PostQueryDslRepository{
     }
 
     private BooleanExpression containsSearch(String searchBy, String search) {
-        if(searchBy.equals("title")) {
-            return containsTitle(search);
-        }else if(searchBy.equals("content")) {
-            return containsContent(search);
+        if(searchBy!=null) {
+            if (searchBy.equals("title")) {
+                return containsTitle(search);
+            } else if (searchBy.equals("content")) {
+                return containsContent(search);
+            }
         }
-        return containsTitle(search).or(containsContent(search));
+        return search != null ? containsTitle(search).or(containsContent(search)) : null;
     }
 
     private OrderSpecifier orderSpecifier(SortType sortType, String orderBy) {
@@ -86,6 +83,6 @@ public class PostQueryDslRepositoryImpl implements PostQueryDslRepository{
                 return new OrderSpecifier(Order.DESC, post.viewCount);
             }
         }
-        return null;
+        return new OrderSpecifier(Order.DESC, post.createdAt);
     }
 }

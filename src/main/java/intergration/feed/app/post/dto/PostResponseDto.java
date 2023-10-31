@@ -5,7 +5,6 @@ import intergration.feed.app.post.domain.Post;
 import intergration.feed.app.post.domain.type.SnsType;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.stream.Collectors;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -63,7 +62,7 @@ public class PostResponseDto {
         private LocalDateTime updatedAt;
 
 
-        private static Posting toResponse(Post post) {
+        public static Posting toResponse(Post post) {
             return new Posting(post.getHashTagList(), post.getSnsType(),
                 post.getContent(),post.getViewCount(), post.getLikeCount(), post.getShareCount(),post.getTitle(),post.getCreatedAt(),post.getUpdatedAt());
         }

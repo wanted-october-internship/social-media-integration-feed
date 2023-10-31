@@ -37,17 +37,18 @@ public class PostController {
         return Detail.toResponse(post);
     }
     @GetMapping
-    public Page<Posting> getList(Filter filter) {
-        Page<Post> result = postReadService.getList(filter);
+    public Page<Posting> getList(@LoginCheck LoginInfo loginInfo, Filter filter) {
+        Page<Post> result = postReadService.getList(loginInfo.getLoginId(), filter);
         return PostingList.toResponse(result);
     }
+
     @PostMapping("/like/{postId}")
-    public void like(@PathVariable("postId")Long id, @LoginCheck LoginInfo loginInfo) {
+    public void like(@PathVariable("postId") Long id, @LoginCheck LoginInfo loginInfo) {
         postWriteService.like(id, loginInfo.getLoginId());
     }
 
     @PostMapping("/share/{postId}")
-    public void share(@PathVariable("postId")Long id, @LoginCheck LoginInfo loginInfo) {
+    public void share(@PathVariable("postId") Long id, @LoginCheck LoginInfo loginInfo) {
         postWriteService.share(id, loginInfo.getLoginId());
     }
 }

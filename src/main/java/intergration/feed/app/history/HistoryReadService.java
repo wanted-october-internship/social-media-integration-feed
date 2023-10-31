@@ -4,6 +4,7 @@ import static intergration.feed.common.error.wanted.ErrorCode.NOT_FOUND_ACCOUNT;
 
 import intergration.feed.app.account.AccountRepository;
 import intergration.feed.app.account.domain.Account;
+import intergration.feed.app.account.domain.type.JoinStatus;
 import intergration.feed.app.history.dto.type.HistoryType;
 import intergration.feed.app.post.domain.Post;
 import intergration.feed.app.post.dto.PostResponseDto;
@@ -26,7 +27,7 @@ public class HistoryReadService {
     private final AccountRepository accountRepository;
 
     public List<Posting> getHistoies(String loginId, HistoryType historyType) {
-        Account account = accountRepository.findByLoginId(loginId)
+        Account account = accountRepository.findByLoginIdAndJoinStatus(loginId, JoinStatus.JOIN)
             .orElseThrow(() -> new WantedException(NOT_FOUND_ACCOUNT));
         if (historyType != null) {
             if (historyType == HistoryType.SHARE) {

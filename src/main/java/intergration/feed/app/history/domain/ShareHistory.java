@@ -6,6 +6,7 @@ import intergration.feed.common.BaseEntity;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,7 +17,7 @@ import lombok.NoArgsConstructor;
 public class ShareHistory extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     private Account account;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY)
     private Post post;
 
     private ShareHistory(Account account, Post post) {

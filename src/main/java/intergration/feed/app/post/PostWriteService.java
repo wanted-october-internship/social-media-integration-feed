@@ -45,29 +45,38 @@ public class PostWriteService {
         Account account = accountRepository.findByLoginId(loginId)
             .orElseThrow(() -> new WantedException(NOT_FOUND_ACCOUNT));
 
-        viewHistoryRepository.save(ViewHistory.create(account,post));
-
         String snsName = post.getSns();
         SnsService snsService = snsServiceMap.get(snsName);
 
         boolean isLike = snsService.like(post.getId());
-        if(isLike) {
-            post.updateLikeCount();
+        if (isLike) {
+            int count = viewHistoryRepository.countByAccountAndPost(account, post);
+            if (count == 0) {
+                post.updateLikeCount();
+                viewHistoryRepository.save(ViewHistory.create(account, post));
+            }
         }
     }
+
     public void share(Long id, String loginId) {
         Post post = postRepository.findById(id)
             .orElseThrow(() -> new WantedException(NOT_FOUND_POST));
         Account account = accountRepository.findByLoginId(loginId)
             .orElseThrow(() -> new WantedException(NOT_FOUND_ACCOUNT));
-        shareHistoryRepository.save(ShareHistory.create(account,post));
+        shareHistoryRepository.save(ShareHistory.create(account, post));
 
         String snsName = post.getSns();
         SnsService snsService = snsServiceMap.get(snsName);
 
         boolean isLike = snsService.share(post.getId());
-        if(isLike) {
-            post.updateShareCount();
+        if (isLike) {
+            int count = shareHistoryRepository.countByAccountAndPost(account, post);
+            post.updateShareCount(count);
+            if (count == 0) {
+                shareHistoryRepository.save(ShareHistory.create(account, post));
+            } else {
+                shareHistoryRepository.deleteByAccountAndPost(account, post);
+            }
         }
     }
 }
